@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/one.ico" type="image/x-icon">
+    <title>Encriptador - Inicio</title>
+    <meta name="description" content="Encriptador es una solución avanzada de encriptación y desencriptación de texto, desarrollada especialmente para el Alura Challenge - Encriptador del programa ONE G7, impulsada por Oracle y Alura latam.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <img class="header__image" src="assets/aluralatam-oracle.webp" alt="Logo de Alura latam y Oracle">
+    </header>
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 class="card__title">Encriptador</h1>
+                <div class="tab">
+                    <div class="tab__slider"></div>
+                    <button class="tab__button active" data-tab="encrypt">Encrypt</button>
+                    <button class="tab__button" data-tab="decrypt">Decrypt</button>
+                </div>
+                <div class="input active">
+                    <label for="input-text" class="input__title">Text to encrypt</label>
+                    <div class="input__group">
+                        <input placeholder="Enter text" type="text" id="input-text">
+                    </div>
+                </div>
+                <button id="action-button" class="action-button">Encrypt</button>
+                <div class="output">
+                    <label for="output-text">Result</label>
+                    <div class="output__group">
+                        <input type="text" id="output-text" class="output-text" readonly>
+                        <button class="copyButton" aria-label="Copy to clipboard">
+                            <img src="assets/copy-solid.svg" alt="Icon of copy to clipboard" class="copyButton__icon">
+                        </button>
+                        <span class="copyButton__feedback">Text Copied!</span>
+                    </div>                
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>&copy; Encriptador desarrollado por Diego Encino</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.tab__button');
+            const slider = document.querySelector('.tab__slider');
+            const titleInput = document.querySelector('.input__title');
+            const actionBtn = document.getElementById('action-button');
+            const inputText = document.getElementById('input-text');
+            const outputText = document.getElementById('output-text');
+            let currentMode = 'encrypt';
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('active')) {
+                        return;
+                    }
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentMode = this.dataset.tab;
+                    titleInput.textContent = `Text to ${currentMode}`;
+                    inputText.value = "";
+                    outputText.value = "";
+
+                    actionBtn.textContent = currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
+
+                    slider.style.left = currentMode === 'encrypt' ? '5px' : 'calc(50% + 2.5px)';
+                });
+            });
+
+            actionBtn.addEventListener('click', () => {
+                const text = inputText.value;
+                outputText.value = currentMode === 'encrypt' ? encrypt(text) : decrypt(text);
+            });
+
+            const textValidate = (text) => /^[a-z]+$/.test(text);
+
+            const encrypt = (text) => {
+                if (textValidate(text)) {
+                    return text
+                        .replace(/e/g, "enter")
+                        .replace(/i/g, "imes")
+                        .replace(/a/g, "ai")
+                        .replace(/o/g, "ober")
+                        .replace(/u/g, "ufat");
+                } else if (text === '') {
+                    return 'Debe ingresar un texto';
+                } else {
+                    return 'Unicamente letras minusculas sin caracteres especiales';
+                }
+            };
+
+            const decrypt = (text) => {
+                if (textValidate(text)) {
+                    return text
+                        .replace(/enter/g, "e")
+                        .replace(/imes/g, "i")
+                        .replace(/ai/g, "a")
+                        .replace(/ober/g, "o")
+                        .replace(/ufat/g, "u");
+                } else {
+                    return 'Unicamente letras minusculas sin caracteres especiales';
+                }
+            };
+
+            document.querySelector('.copyButton').addEventListener('click', () => {
+                const copyText = document.getElementById('output-text');
+                navigator.clipboard.writeText(copyText.value)
+                    .then(() => {
+                        let feedback = document.querySelector('.copyButton__feedback');
+                        feedback.classList.add('show');
+                        setTimeout(() => {
+                            feedback.classList.remove('show');
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Error al copiar el texto: ', err);
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

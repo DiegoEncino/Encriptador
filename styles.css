@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  height: 10vh;
+}
+
+.header__image {
+  max-width: 200px;
+}
+
+.footer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  align-content: center;
+  font-family: "Figtree", sans-serif;
+  height: 10vh ;
+  color: #29d32c;
+}
+
+main {
+  font-family: "Figtree", sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(80vh - 40px);
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card__title {
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #da2f2f;
+}
+
+.tab {
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 5px;
+  position: relative;
+  width: calc(100% - 10px); /* Ajusta según tu diseño */
+  margin-bottom: 40px;
+}
+
+.tab__slider {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 10px); /* Ajusta el ancho del slider */
+  background-color: white;
+  border-radius: 8px;
+  z-index: 0;
+  transition: left 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab__button {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #6c6b70;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.tab__button.active {
+  color: #000;
+}
+
+.input {
+  display: none;
+}
+
+.input.active {
+  display: block;
+}
+
+.input__group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input[type="text"] {
+  width: calc(100%);
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+output-text {
+  width: calc(100% - 60px);
+}
+
+.action-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #000;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #081d34;
+}
+
+.output {
+  margin-top: 20px;
+}
+
+.output__group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.copyButton {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 7.5px 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.copyButton::selection {
+  border: 1px solid #000;
+}
+
+.copyButton__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.copyButton:focus {
+  outline: none;
+}
+
+.copyButton__feedback {
+  margin-left: 10px;
+  background: none;
+  cursor: pointer;
+
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px 10px;
+  position: absolute;
+  top: -30px;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  font-size: 12px;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+}
+
+.copyButton__feedback.show {
+  visibility: visible;
+  opacity: 1;
+}
